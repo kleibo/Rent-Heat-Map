@@ -21,7 +21,7 @@ class Scraper:
         # Vectorization
         web_path = (self.url + 'average-rent-market-trends/us/' + state_abrv + '/' + city + '/').to_list()
 
-        for i in web_path[:2]:
+        for i in web_path[:5]:
         # make a request to the website
             
             print(i)
@@ -30,8 +30,11 @@ class Scraper:
         # parse the HTML
             soup = BeautifulSoup(page.text, 'html.parser')
 
-
-            print(soup.find('title'))
+            
+            if soup.find('title') == "404 - Not Found":
+                print("No div")
+            else:
+                print(soup.find_all('tr', class_='current-row'))
 
 test = Scraper()
 test.webScrape()
