@@ -19,17 +19,19 @@ class Scraper:
         city = city.str.replace(" ", "-")
 
         # Vectorization
-        web_path = (state_abrv + '/' + city).to_list()
+        web_path = (self.url + 'average-rent-market-trends/us/' + state_abrv + '/' + city + '/').to_list()
 
-        print(web_path)
-        # # for i in web_path:
-        # #     make a request to the website
-        # #     response = requests.get(self.url + 'average-rentmarket-trends/us/' + str(i))
+        for i in web_path[:2]:
+        # make a request to the website
+            
+            print(i)
+            page = requests.get(str(i))
+            print(page.status_code)
+        # parse the HTML
+            soup = BeautifulSoup(page.text, 'html.parser')
 
-        # #     print(response)
 
-        # #     parse the HTML
-        # #     soup = BeautifulSoup(response.text, 'html.parser')
+            print(soup.find('title'))
 
 test = Scraper()
 test.webScrape()
